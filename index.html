@@ -637,6 +637,14 @@ const io = new IntersectionObserver((entries) => {
   entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('v'); io.unobserve(e.target); } });
 }, {threshold:0.1});
 document.querySelectorAll('.rv,.rl,.rr').forEach(el => io.observe(el));
+
+// URLの #privacy / #terms で法務ページを直接開く
+function routeFromHash() {
+  const h = location.hash.replace('#', '');
+  if (h === 'privacy' || h === 'terms') showLegal(h);
+}
+window.addEventListener('hashchange', routeFromHash);
+routeFromHash();
 </script>
 </body>
 </html>
